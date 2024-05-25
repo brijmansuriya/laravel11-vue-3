@@ -79,7 +79,7 @@ const router = createRouter({
 //   const authStore = useAuthStore();
 //   console.log(authStore.token); 
 //   // const isAuthenticated = authStore.getTokenFromLocalStorage; // Assuming you have a method to check authentication status in your store
-  
+
 //   if (authStore.token == null) { 
 //     routes.push('Login');
 //     // next('/login'); // Redirect to login if authentication is required but user is not authenticated
@@ -91,14 +91,14 @@ const router = createRouter({
 
 
 function checkAdminRights(to, from, next) {
+  
   const authStore = useAuthStore();
-    console.log(authStore.token); 
-    const isAuthenticated = authStore.getTokenFromLocalStorage; // Assuming you have a method to check authentication status in your store
-    
-  if(authStore.token == null) {
-      next({ path: '/Login'});       
+  const isAuthenticated = authStore.getTokenFromLocalStorage; // Assuming you have a method to check authentication status in your store
+
+  if (authStore.token == null) {
+    next({ path: '/Login' });
   } else {
-      next();
+    next();
   }
 }
 export default router

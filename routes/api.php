@@ -14,3 +14,5 @@ Route::post('/tokens/create', function (Request $request) {
 });
 
 Route::post('/register', [AuthController::class, 'create']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);

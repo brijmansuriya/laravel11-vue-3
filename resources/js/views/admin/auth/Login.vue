@@ -36,21 +36,15 @@ import { useAuthStore } from '../../../store/authStore';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const { login } = useAuthStore();
+const { login,tekon } = useAuthStore();
 const email = ref('');
 const password = ref('');
 const router = useRouter();
 
 const handelLogin = async () => {
   const isLoggedIn = await login(email.value, password.value);
-  console.log('isLoggedIn:::::::',isLoggedIn);
   if (isLoggedIn) {
-    // Redirect to home page or any other page upon successful login
-    // router.push({ name: 'AdminHome' });
     router.push({ name: 'Dashboard' });
-  } else {
-    router.push('/');
-    // Handle failed login
   }
 };
 </script>

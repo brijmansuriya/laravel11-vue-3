@@ -9,6 +9,11 @@ export const useAuthStore = defineStore({
         user: null,
         errors : {},
     }),
+    getters: {
+        isAuthenticated() {
+            return !!this.token;
+        }
+    },
     actions: {
         async login(email, password) {
             try {
@@ -29,8 +34,10 @@ export const useAuthStore = defineStore({
             // this.errors.value = null;
             try {
                 const response = await axios.post('api/register', { name, email, password });
-                console.log('::::::::::::response',response);
+                console.log('::::::::::::response',response.data);
                 if (response.data.status) {
+                    //log token
+                    console.log('::::::::::::response.data.data.token',response.data.data.token);
                     this.setToken(response.data.data.token);
                     return true; // Indicate successful login
                 } else {

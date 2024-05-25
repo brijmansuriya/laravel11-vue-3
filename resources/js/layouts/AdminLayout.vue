@@ -10,15 +10,10 @@
               </div>
               <div>
                 <div class="ml-10 flex items-baseline space-x-4">
-                  <!-- <a v-for="item in navigation" :key="item.name" :href="item.href"
-                    :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']"
-                    :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a> -->
-                    <!-- Show logout button when user is logged in -->
                     <button @click="handleLogout" type="button"
                       class="btn bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded">
                       Logout
                     </button>
-                    <!-- Show login and register links when user is not logged in -->
                     <router-link v-for="item in navigation" :key="item.name" :to="{ name: item.route }"
                       :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']"
                       :aria-current="item.current ? 'page' : undefined">{{ item.name }}</router-link>
@@ -44,28 +39,29 @@
 <script setup>
 import { Disclosure } from '@headlessui/vue'
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { isAuthenticated } from '../store/authStore';
+
+
+const router = useRouter();
 const navigation = [
   { name: 'AdminHome', route: 'AdminHome', current: true },
   { name: 'login', route: 'Login', current: false },
   { name: 'register', route: 'Register', current: false },
 ]
-
 const handleLogout = async () => {
-  try {
-    // Remove items from localStorage
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
-    // Call logout API
-    await axios.post('/api/logout');
-
-    // Redirect to login page
-    navigateTo('/login');
-  } catch (error) {
-    // Handle errors, such as network errors or server errors
-    console.error('Logout failed:', error);
-    // Optionally, display an error message to the user
-  }
+  console.log('::::::',isAuthenticated);
+  // try {
+  //   // Remove items from localStorage
+  //  const token = localStorage.removeItem('token');
+  //   // Call logout API
+  //   await axios.post('/api/logout');
+  //   // Redirect to login page
+  //   router.push({ name: 'Login' });
+  // } catch (error) {
+  //   // Handle errors, such as network errors or server errors
+  //   console.error('Logout failed:', error);
+  //   // Optionally, display an error message to the user
+  // }
 }
-
 </script>

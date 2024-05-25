@@ -4,8 +4,6 @@
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Admin Register</h2>
       </div>
-
-      {{ errors }}
       <div v-if="errors">
     <div v-for="(value,index) in errors.value" :key="index" class="bg-indigo-600 text-white rounded font-bold mb-4 shadow-lg py-2 px-4 pr-0">
         <p v-for="error in value" :key="error" class="text-sm">
@@ -67,6 +65,7 @@ const errorMessage = ref('');
 
 const handelRegister = async () => {
   const isLoggedIn = await register(name.value ,email.value, password.value);
+  console.log('isLoggedIn',isLoggedIn);
   if (isLoggedIn) {
     // Redirect to home page or any other page upon successful login
     // router.push({ name: 'AdminHome' });
